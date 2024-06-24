@@ -11,10 +11,18 @@ screen.fill( BG_COLOUR )
 #Kod Pygame
 class Game: 
     def __init__(self):
-        pass
-    def show
+        self.show_lines()
+        
+    def show_lines(self):
+        #pionowe
+        pygame.draw.line(screen, LINE_COLOUR, (SQSIZE, 0), (SQSIZE, HEIGHT), LINE_WIDTH)
+
+        #poziome
 
 def main():
+
+    #objekt
+    game = Game()
     
     while True:
 
