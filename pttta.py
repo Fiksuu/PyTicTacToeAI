@@ -14,6 +14,8 @@ class Board:
 
     def __init__(self):
         self.squares = np.zeros( (ROWS, COLS) )
+    
+        
 
 class Game: 
     def __init__(self):
