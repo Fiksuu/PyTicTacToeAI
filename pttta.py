@@ -16,6 +16,7 @@ class Game:
     def show_lines(self):
         #pionowe
         pygame.draw.line(screen, LINE_COLOUR, (SQSIZE, 0), (SQSIZE, HEIGHT), LINE_WIDTH)
+        pygame.draw.line(screen, LINE_COLOUR, (SQSIZE, 0), (SQSIZE, HEIGHT), LINE_WIDTH)
 
         #poziome
 
