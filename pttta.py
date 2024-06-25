@@ -14,12 +14,14 @@ class Board:
 
     def __init__(self):
         self.squares = np.zeros( (ROWS, COLS) )
-    
-        
+
+    def mark_sqrt(self, row, col, player):
+        self.squares[row] [col] = player
 
 class Game: 
     def __init__(self):
-        self.board
+        self.board = Board()
+        self.player = 1
         self.show_lines()
         
     def show_lines(self):
@@ -44,6 +46,8 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN
 
         pygame.display.update()    
 
