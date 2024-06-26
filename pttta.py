@@ -38,10 +38,13 @@ class Game:
 
     def draw_fig(self, row, col):
         if self.player == 1:
+            #krzyżyk
             pass
 
         elif self.player == 2:
-            pass
+            #kółko
+            center = ()
+            pygame.draw.circle(screen, CIRC_COLOUR, center, RADIUS, CIRC_WIDTH)
         
         #zmiana gracza
     def next_player(self):
