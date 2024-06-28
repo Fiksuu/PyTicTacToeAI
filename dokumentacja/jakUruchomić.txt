@@ -1,0 +1,6 @@
+Aby urochomić program należy mieć zainstalowany na komputerze:
+Python3 - https://www.python.org/downloads/
+Po zainstalowaniu pythona możemy przejść do "Wiersza polecenia", musimy w nim wpisać 2 komendy:
+pygame - "pip install pygame"
+numpy - "pip install numpy"
+Teraz można uruchomić grę
