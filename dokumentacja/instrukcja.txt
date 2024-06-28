@@ -1,0 +1,4 @@
+Naciśnij 'g' aby zminić tryb (pvp or ai)
+Naciśnij '0' aby zminić poziom trudności na łatwy (random) 
+Naciśnij '1' żeby zminić poziom trudności na trudny
+Naciśnij 'r' aby zrestartować grę
