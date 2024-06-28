@@ -1,1 +1,3 @@
 https://github.com/Fiksuu/PyTicTacToeAI
+Piotr Fiks 52668
+Mateusz Durka 54398
