@@ -8,21 +8,31 @@ from consts import *
 
 # --- KONFIGURACJA PYGAME ---
 
+# Inicjalizacja biblioteki Pygame
 pygame.init()
-screen = pygame.display.set_mode( (WIDTH, HEIGHT) )
+# Ustawienie rozmiaru okna gry
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# Ustawienie tytułu okna gry
 pygame.display.set_caption('KÓŁKO I KRZYŻYK AI')
+# Wypełnienie tła okna gry kolorem
 screen.fill( BG_COLOUR )
 
 # --- KLASY ---
 
+# Klasa reprezentująca planszę gry
 class Board:
-
+    # Konstruktor klasy
     def __init__(self):
-        self.squares = np.zeros( (ROWS, COLS) )
-        self.empty_sqrs = self.squares # [kwadraty]
+        # Inicjalizacja planszy jako macierzy zer
+        self.squares = np.zeros((ROWS, COLS))
+        # Lista pustych kwadratów (na początku wszystkie)
+        self.empty_sqrs = self.squares
+        # Licznik zaznaczonych kwadratów
         self.marked_sqrs = 0
 
+    # Metoda sprawdzająca stan końcowy gry
     def final_state(self, show=False):
+        # Sprawdzenie warunków wygranej dla obu graczy oraz remisu
         '''
             @return 0 jeśli jeszcze nie ma wygranej
             @return 1 jeśli gracz 1 wygrywa
@@ -70,14 +80,21 @@ class Board:
         # jeszcze nie ma wygranej
         return 0
 
+# Metoda zaznaczająca kwadrat przez gracza
     def mark_sqr(self, row, col, player):
+        # Zaznaczenie kwadratu w macierzy planszy
         self.squares[row][col] = player
+        # Inkrementacja licznika zaznaczonych kwadratów
         self.marked_sqrs += 1
 
+    # Metoda sprawdzająca czy kwadrat jest pusty
     def empty_sqr(self, row, col):
+        # Zwraca True jeśli kwadrat jest pusty
         return self.squares[row][col] == 0
 
+    # Metoda zwracająca listę pustych kwadratów
     def get_empty_sqrs(self):
+        # Zwraca listę pustych kwadratów
         empty_sqrs = []
         for row in range(ROWS):
             for col in range(COLS):
@@ -86,21 +103,30 @@ class Board:
         
         return empty_sqrs
 
+    # Metoda sprawdzająca czy plansza jest pełna
     def isfull(self):
+        # Zwraca True jeśli wszystkie kwadraty są zaznaczone
         return self.marked_sqrs == 9
 
+    # Metoda sprawdzająca czy plansza jest pusta
     def isempty(self):
+        # Zwraca True jeśli żaden kwadrat nie jest zaznaczony
         return self.marked_sqrs == 0
 
+# Klasa reprezentująca sztuczną inteligencję
 class AI:
-
+    # Konstruktor klasy
     def __init__(self, level=1, player=2):
+        # Poziom trudności AI
         self.level = level
+        # Numer gracza AI
         self.player = player
 
     # --- LOSOWANIE ---
 
+    # Metoda losowego wyboru ruchu przez AI
     def rnd(self, board):
+        # Losowy wybór pustego kwadratu
         empty_sqrs = board.get_empty_sqrs()
         idx = random.randrange(0, len(empty_sqrs))
 
@@ -108,7 +134,9 @@ class AI:
 
     # --- MINIMAX ---
 
+    # Metoda algorytmu minimax
     def minimax(self, board, maximizing):
+        # Implementacja algorytmu minimax
         
         # przypadek końcowy
         case = board.final_state()
@@ -157,7 +185,9 @@ class AI:
 
     # --- GŁÓWNA OCENA ---
 
+    # Metoda oceny ruchu przez AI
     def eval(self, main_board):
+        # Wybór ruchu na podstawie poziomu trudności
         if self.level == 0:
             # losowy wybór
             eval = 'losowy'
@@ -170,17 +200,23 @@ class AI:
 
         return move # wiersz, kolumna
 
+# Klasa reprezentująca grę
 class Game:
-
+    # Konstruktor klasy
     def __init__(self):
+        # Inicjalizacja planszy i AI
         self.board = Board()
         self.ai = AI()
-        self.player = 1   #1-krzyżyk  #2-kółko
-        self.gamemode = 'ai' # pvp lub ai
+        # Ustawienie gracza rozpoczynającego grę
+        self.player = 1   # 1-krzyżyk  # 2-kółko
+        # Tryb gry: przeciwko AI lub gracz przeciwko graczowi
+        self.gamemode = 'ai'
+        # Stan gry: trwa lub zakończona
         self.running = True
+        # Wyświetlenie linii podziału planszy
         self.show_lines()
 
-    # --- METODY RYSOWANIA ---
+    # --- METODY RYSOWANIA ELEMENTÓW NA PLANSZY---
 
     def show_lines(self):
         # tło
@@ -213,27 +249,38 @@ class Game:
 
     # --- INNE METODY ---
 
+    # Metoda wykonująca ruch
     def make_move(self, row, col):
+        # Zaznaczenie kwadratu i narysowanie figury
         self.board.mark_sqr(row, col, self.player)
         self.draw_fig(row, col)
         self.next_turn()
 
+    # Metoda zmieniająca tury graczy
     def next_turn(self):
+        # Przełączenie tury na drugiego gracza
         self.player = self.player % 2 + 1
 
+    # Metoda zmieniająca tryb gry
     def change_gamemode(self):
+        # Przełączenie między trybem AI a PvP
         self.gamemode = 'ai' if self.gamemode == 'pvp' else 'pvp'
 
+    # Metoda sprawdzająca czy gra się zakończyła
     def isover(self):
+        # Sprawdzenie czy jest stan końcowy lub plansza pełna
         return self.board.final_state(show=True) != 0 or self.board.isfull()
 
+    # Metoda resetująca grę
     def reset(self):
+        # Reset gry do stanu początkowego
         self.__init__()
-
-def main():
 
     # --- OBIEKTY ---
 
+    # Główna funkcja gry
+def main():
+    # Inicjalizacja gry i jej komponentów
     game = Game()
     board = game.board
     ai = game.ai
