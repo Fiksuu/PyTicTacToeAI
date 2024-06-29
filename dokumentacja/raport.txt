@@ -1,0 +1,74 @@
+RAPORT PROJEKTOWY GRY TIC-TAC-TOE
+
+
+Informatyka niestacjonarna, I rok, grupa 1
+Kurs: Programowanie w języku Python II ćwiczenia, lato 23/24
+Skład zespołu: Piotr Fiks 52668, Mateusz Durka 54398
+
+
+Opis projektu
+Gra "Kółko i Krzyżyk AI" to komputerowa wersja klasycznej gry, w której dwaj gracze (lub gracz i komputer) na przemian umieszczają swoje znaki (kółko lub krzyżyk) na planszy 3x3. Celem gry jest uzyskanie trzech swoich znaków w jednej linii - pionowo, poziomo lub na przekątnej. Projekt ten implementuje zarówno tryb gry dla dwóch graczy (PvP), jak i tryb gry przeciwko sztucznej inteligencji (AI).
+
+Użyte narzędzia, biblioteki oraz frameworki
+Python: Język programowania użyty do implementacji logiki gry.
+Pygame: Biblioteka Pythona użyta do obsługi grafiki i interakcji 
+z użytkownikiem.
+Numpy: Biblioteka użyta do zarządzania macierzami reprezentującymi planszę gry.
+Copy: Moduł użyty do tworzenia głębokich kopii obiektów.
+
+Opis zaimplentowanych klas i funkcji
+
+Klasa „Board”
+__init__: Inicjalizuje planszę jako macierz zer, tworzy listę pustych kwadratów i licznik zaznaczonych kwadratów.
+final_state: Sprawdza stan końcowy gry (wygrana lub remis). Rysuje linię zwycięstwa, jeśli show jest ustawione na True.
+mark_sqr: Zaznacza kwadrat przez gracza.
+empty_sqr: Sprawdza, czy kwadrat jest pusty.
+get_empty_sqrs: Zwraca listę pustych kwadratów.
+isfull: Sprawdza, czy plansza jest pełna.
+isempty: Sprawdza, czy plansza jest pusta.
+
+Klasa „AI”
+__init__: Inicjalizuje poziom trudności AI oraz numer gracza.
+rnd: Losowo wybiera pusty kwadrat.
+minimax: Implementuje algorytm Minimax do wyboru najlepszego ruchu.
+eval: Ocena ruchu przez AI na podstawie poziomu trudności.
+
+Klasa „Game”
+__init__: Inicjalizuje planszę i AI, ustawia gracza rozpoczynającego grę, tryb gry oraz stan gry. Wyświetla linie podziału planszy.
+show_lines: Rysuje linie podziału na planszy.
+draw_fig: Rysuje kółko lub krzyżyk na planszy w zależności od gracza.
+make_move: Wykonuje ruch gracza lub AI, zaznaczając kwadrat 
+i rysując figurę.
+next_turn: Przełącza turę na drugiego gracza.
+change_gamemode: Przełącza tryb gry między AI a PvP.
+isover: Sprawdza, czy gra się zakończyła (stan końcowy lub plansza pełna).
+reset: Resetuje grę do stanu początkowego.
+
+Główna funkcja gry
+main: Inicjalizuje grę i jej komponenty, obsługuje zdarzenia Pygame, zarządza logiką gry i wywołuje odpowiednie metody.
+
+Napotkane problemy
+
+Implementacja algorytmu Minimax 
+Algorytm Minimax jest dość złożony, zwłaszcza w kontekście gry w kółko 
+i krzyżyk. Problemy dotyczyły głównie obsługi różnych przypadków końcowych oraz optymalizacji wydajności. Algorytm Minimax jest podstawową metodą używaną w teorii gier do podejmowania decyzji w grach dwuosobowych z pełną informacją, takich jak szachy, warcaby czy kółko i krzyżyk. Jest to technika rekurencyjna, która pozwala na przewidywanie ruchów przeciwnika i optymalizowanie strategii w celu osiągnięcia najlepszego możliwego wyniku. Działa na zasadzie przeszukiwania drzewa stanów gry, w którym każdy wierzchołek reprezentuje stan gry, a krawędzie reprezentują możliwe ruchy graczy. 
+
+Interakcja Pygame 
+Obsługa zdarzeń Pygame wymagała precyzyjnego zarządzania stanami gry oraz odpowiedniego rysowania elementów na planszy.
+
+Propozycje dalszych funkcjonalności
+Różne poziomy trudności AI: Rozszerzenie AI o więcej poziomów trudności, które mogłyby oferować bardziej złożone strategie.
+Tryb wieloosobowy online: Implementacja trybu gry przez sieć, umożliwiającego grę z innymi graczami online.
+Większe plansze: Dodanie możliwości gry na większych planszach (np. 4x4 lub 5x5), co wprowadziłoby dodatkowe wyzwania strategiczne.
+Statystyki gry: Implementacja modułu zbierającego statystyki z rozegranych gier, takie jak liczba wygranych, przegranych oraz remisy.
+Ulepszenia interfejsu użytkownika: Dodanie bardziej zaawansowanych opcji graficznych, animacji oraz dźwięków, które poprawią ogólne wrażenia z gry.
+
+Decyzje projektowe i technologiczne
+Wybór Pygame: Pygame został wybrany ze względu na jego prostotę i wsparcie dla tworzenia gier 2D, co idealnie pasuje do gry w kółko i krzyżyk.
+Algorytm Minimax: Algorytm Minimax został wybrany do implementacji AI ze względu na jego zdolność do podejmowania optymalnych decyzji w grach typu zero-sum, takich jak kółko i krzyżyk.
+Modularność kodu: Kod został podzielony na klasy i metody w celu zachowania modularności i łatwości utrzymania oraz rozbudowy projektu w przyszłości.
+
+Podsumowanie
+
+Projekt "Tic-Tac-Toe” stanowi solidną podstawę do dalszej rozbudowy i wprowadzenia bardziej zaawansowanych funkcji, które mogą uczynić grę bardziej interesującą i angażującą dla użytkowników.
+
